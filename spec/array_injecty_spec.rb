@@ -1,4 +1,4 @@
-require 'array_inject'
+require 'array_injecty'
 
 describe Array do
   context 'injecty method' do
