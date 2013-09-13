@@ -1,13 +1,20 @@
 class Array
-  def injecty memo=first, &block
-    if !block_given?
-      return nil if empty?
-      raise LocalJumpError, 'no block given'
-    elsif block_given?
-      return yield if empty?
-      first_evaluated = yield memo, first
-      return first_evaluated if length == 1
-      drop(1).injecty(first_evaluated, &block)
-    end
+  def injecty memo=self.first, &block
+    return nil_or_raise_error if !block_given?
+    return yield if self.empty?
+
+    self.evaluate_all_elements_with(memo, &block)
+  end
+
+  def nil_or_raise_error
+    return nil if self.empty?
+    raise LocalJumpError, 'no block given'
+  end
+
+  def evaluate_all_elements_with memo, &block
+    first_evaluated = yield memo, self.first
+    return first_evaluated if self.length == 1
+
+    self.drop(1).evaluate_all_elements_with(first_evaluated, &block)
   end
 end
