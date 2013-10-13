@@ -1,8 +1,11 @@
 require 'array_injecty'
 
 describe Array do
+
   context 'injecty method' do
+
     context 'when no block is given' do
+
       it 'should return nil for an empty array' do
         array = Array.new
         expect(array.injecty).to be_nil
@@ -12,10 +15,13 @@ describe Array do
         array = [1]
         expect { array.injecty }.to raise_error(LocalJumpError, 'no block given')
       end
+
     end
 
     context 'when a block is given' do
+
       context 'should return the block evaluation for an empty array' do
+
         let(:array) { Array.new }
 
         it 'when passing one' do
@@ -25,9 +31,11 @@ describe Array do
         it 'when passing in a computation' do
           expect(array.injecty { 500 / 5 }).to eq 100
         end
+
       end
 
       context 'should apply the block to the element of singleton array' do
+
         let(:array) { [5] }
 
         it 'when passing a block with a string' do
@@ -41,9 +49,11 @@ describe Array do
         it 'when passing a block with a computation' do
           expect(array.injecty { |memo, num| memo + (num * 5) }).to eq 30
         end
+
       end
 
       context 'should apply the block to all elements of an array' do
+
         let(:array) { [1, 2, 3] }
 
         it 'when passing a block with a string' do
@@ -62,7 +72,11 @@ describe Array do
           array = ['a', 'b', 'c']
           expect(array.inject { |memo, char| memo << char }).to eq 'abc'
         end
+
       end
+
     end
+
   end
+
 end

@@ -1,4 +1,5 @@
 class Array
+
   def injecty memo=self.first, &block
     return nil_if_empty_or_raise_error if !block_given?
     return yield if self.empty?
@@ -17,4 +18,5 @@ class Array
 
     self.drop(1).evaluate_all_elements_with(first_element_evaluated, &block)
   end
+
 end
